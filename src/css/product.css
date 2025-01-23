@@ -1,0 +1,124 @@
+/* General Container */
+.product-page {
+    margin-top: 50px;
+  }
+  
+  /* Image Section */
+  .product-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    width: 100%;
+}
+  
+  /* Details Section */
+  .product-details {
+    padding-left: 30px;
+  }
+  
+  /* Sale Badge */
+  .sale-badge {
+    background-color: #ff7976;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  /* Product Title */
+  .product-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  /* Product Rating */
+  .product-rating {
+    color: #ffc107;
+    font-size: 18px;
+  }
+  
+  /* Product Price */
+  .product-price {
+    font-size: 32px;
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .discount-price {
+    font-size: 18px;
+    color: #6c757d;
+    margin-left: 10px;
+  }
+  
+  .discount-info {
+    font-size: 16px;
+    color: #6c757d;
+  }
+  
+  /* Product Description */
+  .product-description {
+    font-size: 16px;
+    color: #6c757d;
+    margin-top: 15px;
+  }
+  
+  /* Size Selector */
+  .size-selector {
+    margin-top: 20px;
+  }
+  
+  .size-button {
+    margin-right: 5px;
+    font-size: 14px;
+  }
+  
+  .selected {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  /* Quantity and Add to Cart */
+  .quantity-cart {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .quantity-input input {
+    width: 60px;
+    text-align: center;
+  }
+  
+  .add-to-cart {
+    margin-left: 15px;
+    padding: 10px 20px;
+  }
+  
+  .wishlist-button, .compare-button {
+    margin-left: 10px;
+    padding: 10px;
+  }
+  
+  /* Product Info */
+  .product-info {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  /* Related Products */
+  .related-products {
+    margin-top: 50px;
+  }
+  
+  .related-products-carousel {
+    display: flex;
+    justify-content: start;
+  }
+  
+  .related-product-img {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+  }
+  
