@@ -22,7 +22,7 @@ export default function App() {
       <BrowserRouter>
         <CartProvider>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="ecommerce" element={<Layout />}>
               <Route index element={<Login />} />
               <Route path="home" element={<Home />} />
               <Route path="blogs" element={<Blogs />} />
