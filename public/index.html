@@ -40,4 +40,10 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+  // Redirect to index.html for React Router
+  if (document.location.pathname !== "/" && !document.location.pathname.startsWith("/ecommerce/")) {
+    window.location.href = "/ecommerce" + document.location.pathname;
+  }
+</script>
 </html>
