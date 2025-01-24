@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { HashRouter, Routes, Route } from "react-router-dom";
+// BrowserRouter
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
