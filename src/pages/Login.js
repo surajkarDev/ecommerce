@@ -313,7 +313,7 @@ import { useNavigate } from 'react-router-dom';
       useEffect(() => {
         let login = JSON.parse(localStorage.getItem('login')) || false
         if(login){
-          navigate('/home');
+          navigate('ecommerce/home');
         }
       },[]);
       const handleLoginChange = (e) => {
@@ -359,7 +359,7 @@ import { useNavigate } from 'react-router-dom';
         userInfo.forEach(x => {
           if(x.email === loginData.email && x.password === loginData.password){
             localStorage.setItem('login',true);
-            navigate('/home');
+            navigate('ecommerce/home');
           }
         })
       }
