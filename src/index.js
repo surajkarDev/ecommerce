@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -19,7 +19,7 @@ import { counterContext } from "./context/context";
 export default function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <CartProvider>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -36,7 +36,7 @@ export default function App() {
             </Route>
           </Routes>
         </CartProvider>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 }
