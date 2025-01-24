@@ -12,7 +12,7 @@ const AllProduct = () => {
     useEffect(() => {
       let login = JSON.parse(localStorage.getItem('login')) || false
       if(!login){
-        navigate('/');
+        navigate('ecommerce');
       }
     },[]);
     const [showAlert, setShowAlert] = useState(false);

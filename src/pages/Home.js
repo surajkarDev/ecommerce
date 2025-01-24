@@ -41,7 +41,7 @@ const Home = () => {
   useEffect(() => {
     let login = JSON.parse(localStorage.getItem('login')) || false
     if(!login){
-      navigate('/');
+      navigate('ecommerce');
     }
   },[]);
     return (

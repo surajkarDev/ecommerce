@@ -24,14 +24,14 @@ export default function App() {
           <Routes>
             <Route path="ecommerce" element={<Layout />}>
               <Route index element={<Login />} />
-              <Route path="home" element={<Home />} />
-              <Route path="blogs" element={<Blogs />} />
-              <Route path="allproduct" element={<Allproduct />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="shopCart" element={<ShopCart />} />
-              <Route path="checkout" element={<Checkout />} />
-              <Route path="wishlist" element={<Wishlist />} />
-              <Route path="productshow" element={<Productshow />} />
+              <Route path="ecommerce/home" element={<Home />} />
+              <Route path="ecommerce/blogs" element={<Blogs />} />
+              <Route path="ecommerce/allproduct" element={<Allproduct />} />
+              <Route path="ecommerce/contact" element={<Contact />} />
+              <Route path="ecommerce/shopCart" element={<ShopCart />} />
+              <Route path="ecommerce/checkout" element={<Checkout />} />
+              <Route path="ecommerce/wishlist" element={<Wishlist />} />
+              <Route path="ecommerce/productshow" element={<Productshow />} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>

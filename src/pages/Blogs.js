@@ -139,7 +139,7 @@ const Blogs = () => {
   useEffect(() => {
     let login = JSON.parse(localStorage.getItem('login')) || false
     if(!login){
-      navigate('/');
+      navigate('ecommerce');
     }
     blogApi();
     fetchData();
@@ -158,3 +158,5 @@ const Blogs = () => {
   };
   
   export default memo(Blogs);
+
+  

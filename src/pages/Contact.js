@@ -7,7 +7,7 @@ const Contact = () => {
   useEffect(()=>{
   let login = JSON.parse(localStorage.getItem('login')) || false;
   if(!login){
-    navigate('/');
+    navigate('ecommerce');
   }
   },[])
   const [formData, setFormData] = useState({
