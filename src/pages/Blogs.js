@@ -9,15 +9,15 @@ const Blogs = () => {
   const navigate = useNavigate();
   const [count,setCount] = useState(0)
   const [countContent,setCountContent] = useState('Initial Data')
-  const newArray = new Array(30000000).fill(0).map((_,i) => {
-    return {
-      index:i,
-      isMagical:i===29000000,
-    }
-  })
+  // const newArray = new Array(30000000).fill(0).map((_,i) => {
+  //   return {
+  //     index:i,
+  //     isMagical:i===29000000,
+  //   }
+  // })
 
-  const [numbers,setNumber] = useState(newArray);
-  const magical = useMemo(()=> numbers.find(item => item.isMagical),[])
+  // const [numbers,setNumber] = useState(newArray);
+  // const magical = useMemo(()=> numbers.find(item => item.isMagical),[])
    
   const blogUseCallback = useCallback(() => {
     setCountContent('Use Call Back Returned'+count)
@@ -145,7 +145,7 @@ const Blogs = () => {
     fetchData();
   },[]);
     return <>
-    Magical number is {magical?.index}
+    {/* Magical number is {magical?.index} */}
     <counterContext.Provider value={count}>
       <h1>Blog Articles</h1>
       <Blog></Blog>
