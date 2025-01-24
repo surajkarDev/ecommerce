@@ -9,7 +9,7 @@ const PageHeader = ({ heading, link, linkName }) => {
                     <div className="pageheadermain p-5 rounded-4 my-4">
                         <h1>{heading}</h1>
                         <Breadcrumb className="mt-3">
-                            <Breadcrumb.Item href="/home">Home</Breadcrumb.Item>
+                            <Breadcrumb.Item href="ecommerce/home">Home</Breadcrumb.Item>
                             <Breadcrumb.Item href={link}>{linkName}</Breadcrumb.Item>
                         </Breadcrumb>
                     </div>

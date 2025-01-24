@@ -131,7 +131,7 @@ const ShopCart = () => {
           <Row className="cart-actions">
             <Col>
               {/* <Button variant="success" className="continue-shopping-btn">Continue Shopping</Button> */}
-              <Link to="/home" className="fw-medium px-3 continue-shopping-btn btn text-white px-4">Continue Shopping</Link>
+              <Link to="ecommerce/home" className="fw-medium px-3 continue-shopping-btn btn text-white px-4">Continue Shopping</Link>
             </Col>
             <Col className="text-end">
               <Button variant="primary" className="update-cart-btn" onClick={handleUpdateCart}>
