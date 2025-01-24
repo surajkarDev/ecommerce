@@ -386,150 +386,167 @@ import { useNavigate } from 'react-router-dom';
         <Col lg={12}>
         <Tabs defaultActiveKey="Login" id="uncontrolled-tab-example">
         <Tab eventKey="Login" title="Login" className='border border-top-0 p-5 rounded-3 rounded-top-0'>
-          <Form onSubmit={handleLoginSubmit}>
-              <div className='userFormAll bg-body-secondary border-secondary-subtle p-5 rounded-4 mx-auto text-start'>
-                <div className='userInputs'>
-                  {/* <label className='d-block mb-3 text-start'> Email<span className='errorRequired'>*</span> </label> */}
-                  {/* <input type="email" name="email" className='p-2 w-100 rounded-3 border mb-3' value={loginData.email} onChange={handleLoginChange} /> */}
-                  <Form.Group controlId="formEmail" className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Enter your email"
-                      name="email"
-                      value={loginData.email}
-                      onChange={handleLoginChange}
-                      isInvalid={!!errors.email}
-                    />
-                    <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
-                  </Form.Group>
-                </div>
-                <div className='userInputs'>
-                  {/* <label className='d-block mb-3 text-start'> Password<span className='errorRequired'>*</span> </label>
-                  <input type="password" name="password" className='p-2 w-100 rounded-3 border mb-3' value={loginData.password} onChange={handleLoginChange} /> */}
-                  <Form.Group controlId="formPassword" className={errors.password ? "mb-3 position-relative formPasswordError" : "mb-3 position-relative formPassword"}>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type={!passwordShow? 'password' : 'text'}
-                      placeholder="Enter your password"
-                      name="password"
-                      value={loginData.password}
-                      onChange={handleLoginChange}
-                      isInvalid={!!errors.password}
-                    />
-                    <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
-                    <span className={errors.password ?'passwordShow shift' : 'passwordShow'} onClick={()=>setPasswordShow(!passwordShow)}> 
-                      {!passwordShow ?
+          <div className='row justify-content-center'>
+            <div className='col-xl-6 col-lg-8'>
+            <Form onSubmit={handleLoginSubmit}>
+                <div className='userFormAll bg-body-secondary border-secondary-subtle p-5 rounded-4 mx-auto text-start'>
+                  <div className='userInputs'>
+                    {/* <label className='d-block mb-3 text-start'> Email<span className='errorRequired'>*</span> </label> */}
+                    {/* <input type="email" name="email" className='p-2 w-100 rounded-3 border mb-3' value={loginData.email} onChange={handleLoginChange} /> */}
+                    <Form.Group controlId="formEmail" className="mb-3">
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control
+                        type="email"
+                        placeholder="Enter your email"
+                        name="email"
+                        value={loginData.email}
+                        onChange={handleLoginChange}
+                        isInvalid={!!errors.email}
+                      />
+                      <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
+                    </Form.Group>
+                  </div>
+                  <div className='userInputs'>
+                    {/* <label className='d-block mb-3 text-start'> Password<span className='errorRequired'>*</span> </label>
+                    <input type="password" name="password" className='p-2 w-100 rounded-3 border mb-3' value={loginData.password} onChange={handleLoginChange} /> */}
+                    <Form.Group controlId="formPassword" className={errors.password ? "mb-3 position-relative formPasswordError" : "mb-3 position-relative formPassword"}>
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control
+                        type={!passwordShow? 'password' : 'text'}
+                        placeholder="Enter your password"
+                        name="password"
+                        value={loginData.password}
+                        onChange={handleLoginChange}
+                        isInvalid={!!errors.password}
+                      />
+                      <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
+                      <span className={errors.password ?'passwordShow shift' : 'passwordShow'} onClick={()=>setPasswordShow(!passwordShow)}> 
+                        {!passwordShow ?
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                            </svg>
+                          </>
+                        : 
                         <>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                            <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
                           </svg>
                         </>
-                      : 
-                      <>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
-                          <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
-                          <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
-                        </svg>
-                      </>
-                      
-                      }
-                      
-                      
-                    </span>
-                  </Form.Group>
+                        
+                        }
+                        
+                        
+                      </span>
+                    </Form.Group>
+                  </div>
+                  <div className='userFormButton text-center mt-3'>
+                    <button type="submit" className='position-relative bg-white px-4 py-2 border border-secondary-subtle overflow-hidden fs-5 rounded-3'>Submit</button>
+                  </div>
                 </div>
-                <div className='userFormButton text-center mt-3'>
-                  <button type="submit" className='position-relative bg-white px-4 py-2 border border-secondary-subtle overflow-hidden fs-5 rounded-3'>Submit</button>
-                </div>
-              </div>
-          </Form>
+            </Form>
+            </div>
+          </div>
         </Tab>
         <Tab eventKey="Signup" title="Signup" className='border border-top-0 p-5 rounded-3 rounded-top-0'>
-            <form onSubmit={handleSubmit}>
+        <div className='row justify-content-center'>
+          <div className='col-xl-10 col-lg-10'>
+            <Form onSubmit={handleSubmit}>
               <div className='userFormAll bg-body-secondary border-secondary-subtle p-5 rounded-4 mx-auto text-start'>
-                <div className='userInputs'>
-                  {/* <label className='d-block mb-3 text-start'> First Name<span className='errorRequired'>*</span> </label>
-                  <input type="text" name="firstName" className='p-2 w-100 rounded-3 border  mb-3' value={formData.firstName} onChange={handleChange} /> */}
-                  <Form.Group controlId="formFirstName" className="mb-3">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter your first Name"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      isInvalid={!!signupErrors.firstName}
-                    />
-                    <Form.Control.Feedback type="invalid">{signupErrors.firstName}</Form.Control.Feedback>
-                  </Form.Group>
-                </div>
-                <div className='userInputs'>
-                  {/* <label className='d-block mb-3 text-start'> Last Name<span className='errorRequired'>*</span> </label>
-                  <input type="text" name="lastName" className='p-2 w-100 rounded-3 border  mb-3' value={formData.lastName} onChange={handleChange} /> */}
-                  <Form.Group controlId="formLastName" className="mb-3">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter your last Name"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      isInvalid={!!signupErrors.lastName}
-                    />
-                    <Form.Control.Feedback type="invalid">{signupErrors.lastName}</Form.Control.Feedback>
-                  </Form.Group>
-                </div>
-                <div className='userInputs'>
-                  {/* <label className='d-block mb-3 text-start'> Email<span className='errorRequired'>*</span> </label>
-                  <input type="email" name="email" className='p-2 w-100 rounded-3 border  mb-3' value={formData.email} onChange={handleChange} /> */}
-                  <Form.Group controlId="formEmail" className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Enter your email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      isInvalid={!!signupErrors.email}
-                    />
-                    <Form.Control.Feedback type="invalid">{signupErrors.email}</Form.Control.Feedback>
-                  </Form.Group>
-                </div>
-                <div className='userInputs'>
-                  {/* <label className='d-block mb-3 text-start'> Password<span className='errorRequired'>*</span> </label>
-                  <input type="password" name="password" className='p-2 w-100 rounded-3 border mb-3' value={formData.password} onChange={handleChange} /> */}
-                  <Form.Group controlId="formPassword" className={signupErrors.password ? "mb-3 position-relative formPasswordError" : "mb-3 position-relative formPassword"}>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type={!signupPasswordShow ? "password" :"text"}
-                      placeholder="Enter your password"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      isInvalid={!!signupErrors.password}
-                    />
-                    <Form.Control.Feedback type="invalid">{signupErrors.password}</Form.Control.Feedback>
-                    <span className={signupErrors.password ?'passwordShow shift' : 'passwordShow'} onClick={()=>setSignupPasswordShow(!signupPasswordShow)}> 
-                      {!signupPasswordShow ?
-                        <>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                          </svg>
-                        </>
-                      : 
-                      <>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
-                          <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
-                          <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
-                        </svg>
-                      </>
-                      }
-                    </span>
-                  </Form.Group>
-                </div>
+                <div className='row'>
+                    <div className='col-lg-6'>
+                      <div className='userInputs'>
+                        {/* <label className='d-block mb-3 text-start'> First Name<span className='errorRequired'>*</span> </label>
+                        <input type="text" name="firstName" className='p-2 w-100 rounded-3 border  mb-3' value={formData.firstName} onChange={handleChange} /> */}
+                        <Form.Group controlId="formFirstName" className="mb-3">
+                          <Form.Label>First Name</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter your first Name"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleChange}
+                            isInvalid={!!signupErrors.firstName}
+                          />
+                          <Form.Control.Feedback type="invalid">{signupErrors.firstName}</Form.Control.Feedback>
+                        </Form.Group>
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      <div className='userInputs'>
+                        {/* <label className='d-block mb-3 text-start'> Last Name<span className='errorRequired'>*</span> </label>
+                        <input type="text" name="lastName" className='p-2 w-100 rounded-3 border  mb-3' value={formData.lastName} onChange={handleChange} /> */}
+                        <Form.Group controlId="formLastName" className="mb-3">
+                          <Form.Label>Last Name</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter your last Name"
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleChange}
+                            isInvalid={!!signupErrors.lastName}
+                          />
+                          <Form.Control.Feedback type="invalid">{signupErrors.lastName}</Form.Control.Feedback>
+                        </Form.Group>
+                      </div>
+                    </div>
+                    <div className='col-lg-12'>
+                      <div className='userInputs'>
+                        {/* <label className='d-block mb-3 text-start'> Email<span className='errorRequired'>*</span> </label>
+                        <input type="email" name="email" className='p-2 w-100 rounded-3 border  mb-3' value={formData.email} onChange={handleChange} /> */}
+                        <Form.Group controlId="formEmail" className="mb-3">
+                          <Form.Label>Email</Form.Label>
+                          <Form.Control
+                            type="email"
+                            placeholder="Enter your email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            isInvalid={!!signupErrors.email}
+                          />
+                          <Form.Control.Feedback type="invalid">{signupErrors.email}</Form.Control.Feedback>
+                        </Form.Group>
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      <div className='userInputs'>
+                        {/* <label className='d-block mb-3 text-start'> Password<span className='errorRequired'>*</span> </label>
+                        <input type="password" name="password" className='p-2 w-100 rounded-3 border mb-3' value={formData.password} onChange={handleChange} /> */}
+                        <Form.Group controlId="formPassword" className={signupErrors.password ? "mb-3 position-relative formPasswordError" : "mb-3 position-relative formPassword"}>
+                          <Form.Label>Password</Form.Label>
+                          <Form.Control
+                            type={!signupPasswordShow ? "password" :"text"}
+                            placeholder="Enter your password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            isInvalid={!!signupErrors.password}
+                          />
+                          <Form.Control.Feedback type="invalid">{signupErrors.password}</Form.Control.Feedback>
+                          <span className={signupErrors.password ?'passwordShow shift' : 'passwordShow'} onClick={()=>setSignupPasswordShow(!signupPasswordShow)}> 
+                            {!signupPasswordShow ?
+                              <>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                </svg>
+                              </>
+                            : 
+                            <>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                                <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+                              </svg>
+                            </>
+                            }
+                          </span>
+                        </Form.Group>
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      
                 <div className='userInputs'>
                   {/* <label className='d-block mb-3 text-start'> Confirm Password<span className='errorRequired'>*</span> </label>
                   <input type="password" name="confirmPassword" className='p-2 w-100 rounded-3 border mb-3' value={formData.confirmPassword} onChange={handleChange} /> */}
@@ -563,11 +580,19 @@ import { useNavigate } from 'react-router-dom';
                     </span>
                   </Form.Group>
                 </div>
+                    </div>
+                </div>
+                
+                
+                
+                
                 <div className='userFormButton text-center mt-3'>
                   <button type="submit" className='position-relative bg-white px-4 py-2 border border-secondary-subtle overflow-hidden fs-5 rounded-3'>Submit</button>
                 </div>
               </div>
-          </form>
+            </Form>
+            </div>
+          </div>
         </Tab>
         </Tabs>
         </Col>

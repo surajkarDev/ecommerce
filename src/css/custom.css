@@ -17,7 +17,7 @@ span.errorRequired {
   color: var(--red);
 }
 .userFormAll {
-  width: 45%;
+  width: 100%;
   box-sizing: border-box;
 }
 .userInputs label {
