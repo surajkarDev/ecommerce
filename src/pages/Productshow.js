@@ -53,7 +53,7 @@ const Productshow = () => {
     let login = JSON.parse(localStorage.getItem('login')) || false;
     let cartData = JSON.parse(localStorage.getItem('cartItem')) || []
     if(!login){
-      navigate('ecommerce');
+      navigate('/');
     }
     // Prepopulate quantity if the product is already in the cart
     const existingProduct = cartData.find(item => item.name === myArray?.name);

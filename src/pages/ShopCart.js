@@ -60,7 +60,7 @@ const ShopCart = () => {
   useEffect(() => {
     let login = JSON.parse(localStorage.getItem('login')) || false
     if(!login){
-      navigate('ecommerce');
+      navigate('/');
     }
   },[]);
   return (
@@ -131,7 +131,7 @@ const ShopCart = () => {
           <Row className="cart-actions">
             <Col>
               {/* <Button variant="success" className="continue-shopping-btn">Continue Shopping</Button> */}
-              <Link to="ecommerce/home" className="fw-medium px-3 continue-shopping-btn btn text-white px-4">Continue Shopping</Link>
+              <Link to="/home" className="fw-medium px-3 continue-shopping-btn btn text-white px-4">Continue Shopping</Link>
             </Col>
             <Col className="text-end">
               <Button variant="primary" className="update-cart-btn" onClick={handleUpdateCart}>

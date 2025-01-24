@@ -71,7 +71,7 @@ const Layout = () => {
 
   const LogOut = () => {
     localStorage.setItem('login',false);
-    navigate('ecommerce');
+    navigate('/');
     const userLogin = JSON.parse(localStorage.getItem('login'));
     setLoginData(userLogin)
   }
@@ -83,15 +83,15 @@ const Layout = () => {
     <>
       <Navbar expand="lg" className="py-3 navbarMain">
         <Container className=''>
-          <Navbar.Brand as={Link} to="ecommerce" className='text-capitalize'>Demo</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/" className='text-capitalize'>Demo</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
               {/* <Nav.Link as={Link} to="/" className="fw-medium px-3">Login</Nav.Link> */}
-              <Nav.Link as={Link} to="ecommerce/home" className="fw-medium px-3">Home</Nav.Link>
-              <Nav.Link as={Link} to="ecommerce/allproduct" className="fw-medium px-3">Shop</Nav.Link>
-              <Nav.Link as={Link} to="ecommerce/blogs" className="fw-medium px-3">Blogs</Nav.Link>
-              <Nav.Link as={Link} to="ecommerce/contact" className="fw-medium px-3">Contact</Nav.Link>
+              <Nav.Link as={Link} to="/home" className="fw-medium px-3">Home</Nav.Link>
+              <Nav.Link as={Link} to="/allproduct" className="fw-medium px-3">Shop</Nav.Link>
+              <Nav.Link as={Link} to="/blogs" className="fw-medium px-3">Blogs</Nav.Link>
+              <Nav.Link as={Link} to="/contact" className="fw-medium px-3">Contact</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           <div className="cartData d-flex">

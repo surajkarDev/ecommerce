@@ -9,7 +9,7 @@ const Wishlist = () => {
   useEffect(()=>{
     let login = JSON.parse(localStorage.getItem('login')) || false;
     if(!login){
-      navigate('ecommerce');
+      navigate('/');
     }
   },[]);
   const [cartData, setCartData] = useState([]);
