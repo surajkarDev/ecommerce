@@ -4,6 +4,7 @@ export const cart = createSlice({
     name : 'cart',
     initialState:{
         cartItem:JSON.parse(localStorage.getItem('cartItem')) || [],
+        wishlist:JSON.parse(localStorage.getItem('wishlist')) || [],
         sliderAllItem : [
             {
               img: require('../images/new/products/3.jpg'),
@@ -72,7 +73,6 @@ export const cart = createSlice({
             } else {
                 state.cartItem.push({ ...action.payload, quantity: 1 });
             }
-
             // Save updated cart to localStorage
             localStorage.setItem('cartItem', JSON.stringify(state.cartItem));
         },
@@ -108,10 +108,28 @@ export const cart = createSlice({
             state.cartItem = cartExist; // Update Redux state or similar state management
             localStorage.setItem('cartItem', JSON.stringify(state.cartItem)); // Persist to local storage
         },
+        addToWishlist: (state,action) =>{
+          const existingItem = state.wishlist.find((item) => item.name === action.payload.name);
+
+          if (existingItem) {
+              existingItem.quantity += 1;
+          } else {
+              state.wishlist.push({ ...action.payload, quantity: 1 });
+          }
+          // Save updated cart to localStorage
+          localStorage.setItem('wishlist', JSON.stringify(state.wishlist));
+        },
+        removeFromWishlist:(state, action) => {
+          console.log("removeFromCart",action.payload)
+          state.wishlist = state.wishlist.filter((item) => item.name !== action.payload.name);
+    
+          // Save updated cart to localStorage
+          localStorage.setItem('wishlist', JSON.stringify(state.wishlist));
+        },
     }
 })
 
-export const {addToCart,removeFromCart,addToCartShow} = cart.actions
+export const {addToCart,removeFromCart,addToCartShow,addToWishlist,removeFromWishlist} = cart.actions
 // export const cartItemNews = (state) => state.cartItemAll.sliderAllItem
 
 export default cart.reducer

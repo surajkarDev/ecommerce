@@ -16,7 +16,6 @@ import Productshow from "./pages/Productshow";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import Allproduct from "./pages/Allproduct"
-import { counterContext } from "./context/context";
 export default function App() {
   return (
     <Provider store={store}>
