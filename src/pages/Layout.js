@@ -9,6 +9,8 @@ import Footer from './Footer';
 import { useSelector,useDispatch } from 'react-redux';
 import { removeFromCart } from '../redux/cart';
 
+import logo from '../images/logo.png'
+
 const Layout = () => {
   // redux fetch start
   const dispatch = useSelector(state => state.cartItemAll.cartItem) || []
@@ -81,9 +83,11 @@ const Layout = () => {
   }
   return (
     <>
-      <Navbar expand="lg" className="py-3 navbarMain">
-        <Container className=''>
-          <Navbar.Brand as={Link} to="/" className='text-capitalize'>Demo</Navbar.Brand>
+      <Navbar expand="lg" className="py-4 navbarMain">
+        <Container className='py-2'>
+          <Navbar.Brand as={Link} to="/" className='text-capitalize'>
+          <img src={logo} alt="BuyFresh" width={150} />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">

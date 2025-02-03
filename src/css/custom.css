@@ -52,6 +52,9 @@ span.errorRequired {
 }
 
 /* Header Style Start*/
+.navbar-brand img {
+  filter: drop-shadow(2px 4px 6px #3781a9);
+}
 .navbarMain{
   background: var(--blue) !important;
 }
