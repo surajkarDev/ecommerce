@@ -7,7 +7,7 @@ import { Button, ListGroup,Form } from 'react-bootstrap';
 import Footer from './Footer';
 
 import { useSelector,useDispatch } from 'react-redux';
-import { removeFromCart } from '../redux/cart';
+import { removeFromCart,addToCartCart } from '../redux/cart';
 
 import logo from '../images/logo.png'
 
@@ -55,15 +55,11 @@ const Layout = () => {
     settoggleCart(!toggleCart)
   }
   const addProductQuantity = (e, index) => {
-    const value = e.target.value;
-    const updatedCartItems = cartitem.map((item, idx) => {
-      if (idx === index) {
-        return { ...item, quantity: value };
-      }
-      return item;
-    });
-    setCartItem(updatedCartItems);
-    localStorage.setItem('cartItem', JSON.stringify(updatedCartItems));
+    const updateProductquentity = {
+      ...dispatch[index],
+      quantity: e.target.value 
+    }
+    removedispatch(addToCartCart(updateProductquentity))
   };
   
   useEffect(() => {
