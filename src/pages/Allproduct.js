@@ -61,7 +61,7 @@ const AllProduct = () => {
         <div className="container">
             <div className="row">
             {slides.map((slide, index) => (
-                <div className="col-lg-4 mb-4">
+                <div className="col-lg-3 mb-4">
                         <div key={index} className="px-2 productSlider border">
                         <div className="productImg">
                             <img src={slide.img} alt={`slide${index}`} className="img-fluid" />

@@ -11,7 +11,7 @@ const Footer = () => {
           <Col md={4}>
             <h5>About Us</h5>
             <p>
-              Welcome to our e-commerce store. We provide high-quality products at affordable prices. Shop with us for the best experience.
+              Welcome to our BuyFresh ecommerce store. We provide high-quality products at affordable prices. Shop with us for the best experience.
             </p>
           </Col>
 
@@ -28,13 +28,13 @@ const Footer = () => {
           <Col md={4}>
             <h5>Follow Us</h5>
             <div className="d-flex">
-              <Nav.Link href="https://www.facebook.com" className="text-white me-3">
+              <Nav.Link href="https://www.facebook.com" target='_blank' className="text-white me-3">
                 <FaFacebook size={30} />
               </Nav.Link>
-              <Nav.Link href="https://www.twitter.com" className="text-white me-3">
+              <Nav.Link href="https://www.twitter.com" target='_blank' className="text-white me-3">
                 <FaTwitter size={30} />
               </Nav.Link>
-              <Nav.Link href="https://www.instagram.com" className="text-white">
+              <Nav.Link href="https://www.instagram.com" target='_blank' className="text-white">
                 <FaInstagram size={30} />
               </Nav.Link>
             </div>
