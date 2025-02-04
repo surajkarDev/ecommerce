@@ -126,7 +126,7 @@ const SliderComponent = () => {
 
             <Slider {...settings} ref={sliderRef}>
               {sliderItems.map((slide, index) => (
-                <div key={index} className="px-2 productSlider border position-relative">
+                <div key={index} className={slide.stock === 'Out of Stock' ? "px-2 productSlider border position-relative productSliderDisabled" : "px-2 productSlider border position-relative"}>
                   <div className="productImg">
                     <img src={slide.img} alt={`slide${index}`} className="img-fluid" />
                   </div>
