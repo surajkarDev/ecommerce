@@ -4,59 +4,41 @@ import PageHeader from "../components/pageHeader";
 import '../css/shopcart.css';
 import Alert from 'react-bootstrap/Alert';
 import { Link,useNavigate } from "react-router-dom";
+import { removeFromCart,addToCartCart } from '../redux/cart';
+import { useDispatch,useSelector } from 'react-redux';
 
 const ShopCart = () => {
-  const [cartdata, setcartdata] = useState([]);
+  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
   const [showMessage, setMessage] = useState('')
-  const navigate = useNavigate();
+  const dispatch = useDispatch(); 
+  const cartAllItemAll = useSelector(state => state.cartItemAll.cartItem) || [];
 
-
-  const handleQuantityChange = (e, productId) => {
-    const newQuantity = e.target.value;
-    setcartdata((prevCartData) =>
-      prevCartData.map((product) =>
-        product.id === productId ? { ...product, quantity: Number(newQuantity) } : product
-      )
-    );
+  const handleQuantityChange = (e,index) => {
+    const updatedCartItem = { 
+      ...cartAllItemAll[index], 
+      quantity: e.target.value 
+    };
+    console.log("updatedCartItem",updatedCartItem)
+    dispatch(addToCartCart(updatedCartItem))
   };
 
-  useEffect(() => {
-    const cartDataTemp = JSON.parse(localStorage.getItem('cartItem')) || [];
-    console.log("cartDataTemp", cartDataTemp);
-
-    // Initialize quantities and ids correctly
-    const updatedCartData = cartDataTemp.map((item, index) => ({
-      ...item,
-      id: index + 1, // Assign unique ids based on index
-    }));
-
-    setcartdata(updatedCartData);
-        console.log("Updated cartdata", updatedCartData);
-    }, []);
-
-  const deleteCartData = (id,name) => {
-    const delcartData = cartdata.filter(x => x.id !== id);
-    const dellocalstorage = JSON.parse(localStorage.getItem('cartItem')).filter(x => x.name !== name)
-    localStorage.setItem('cartItem',JSON.stringify(dellocalstorage))
-    setcartdata(delcartData)
+  const deleteCartData = (index) => {
+    const updatedCart = cartAllItemAll[index]
+    dispatch(removeFromCart(updatedCart))
     setMessage('Item Delete Successfully')
     setShowAlert(true)
     setTimeout(() => {
         setShowAlert(false)
     }, 3000);
   }
+
   const handleUpdateCart = () => {
-    // You can implement cart update logic here
-    const newData = cartdata.map(({ id, ...rest }) => rest);
-    console.log("cartdata",newData)
-    localStorage.setItem('cartItem',JSON.stringify(newData))
-    setMessage('Cart Update Successfully')
-    setShowAlert(true)
-    setTimeout(()=>{
-      setShowAlert(false)
-    },3000)
+    if(cartAllItemAll.length > 0){
+      navigate('/checkout');
+    }
   };
+
   useEffect(() => {
     let login = JSON.parse(localStorage.getItem('login')) || false
     if(!login){
@@ -80,7 +62,7 @@ const ShopCart = () => {
       </section>
       <section className="shoopingCartSection">
         <Container className="cart-container">
-          <h5 className="cart-title">There are {cartdata.length} products in your cart</h5>
+          <h5 className="cart-title">There are {cartAllItemAll.length} products in your cart</h5>
           <Table responsive className="cart-table">
             <thead>
               <tr>
@@ -92,7 +74,7 @@ const ShopCart = () => {
               </tr>
             </thead>
             <tbody>
-              {cartdata.length > 0 ? cartdata.map((product) => (
+              {cartAllItemAll.length > 0 ? cartAllItemAll.map((product,index) => (
                 <tr key={product.id} className="cart-item-row">
                   <td className="cart-item">
                     <img src={product.img} alt={product.name} className="cart-item-image" />
@@ -106,12 +88,12 @@ const ShopCart = () => {
                       value={product.quantity}
                       min="1"
                       className="cart-quantity-input"
-                      onChange={(e) => handleQuantityChange(e, product.id)}
+                      onChange={(e) => handleQuantityChange(e,index)}
                     />
                   </td>
                   <td>${(Number(product.newPrice) * product.quantity).toFixed(2)}</td>
                   <td>
-                    <Button variant="light" className="remove-btn" onClick={()=> deleteCartData(product.id,product.name)}>
+                    <Button variant="light" className="remove-btn" onClick={()=> deleteCartData(index)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
@@ -135,7 +117,7 @@ const ShopCart = () => {
             </Col>
             <Col className="text-end">
               <Button variant="primary" className="update-cart-btn" onClick={handleUpdateCart}>
-                Update Cart
+                Go To Checkout
               </Button>
             </Col>
           </Row>

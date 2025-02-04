@@ -76,10 +76,17 @@ export const cart = createSlice({
             // Save updated cart to localStorage
             localStorage.setItem('cartItem', JSON.stringify(state.cartItem));
         },
+        addToCartCart: (state,action) =>{
+          state.cartItem = state.cartItem.map((item) => 
+            item.name === action.payload.name 
+                ? { ...item, quantity: action.payload.quantity }
+                : item
+          );
+          localStorage.setItem('cartItem', JSON.stringify(state.cartItem));
+        },
         removeFromCart:(state, action) => {
             console.log("removeFromCart",action.payload)
           state.cartItem = state.cartItem.filter((item) => item.name !== action.payload.name);
-    
           // Save updated cart to localStorage
           localStorage.setItem('cartItem', JSON.stringify(state.cartItem));
         },
@@ -129,7 +136,7 @@ export const cart = createSlice({
     }
 })
 
-export const {addToCart,removeFromCart,addToCartShow,addToWishlist,removeFromWishlist} = cart.actions
+export const {addToCart,removeFromCart,addToCartShow,addToWishlist,removeFromWishlist,addToCartCart} = cart.actions
 // export const cartItemNews = (state) => state.cartItemAll.sliderAllItem
 
 export default cart.reducer
