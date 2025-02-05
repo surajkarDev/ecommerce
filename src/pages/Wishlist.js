@@ -37,7 +37,7 @@ const Wishlist = () => {
   const addTocartCommon = (index) => {
     const product = {...wishlistList[index]};
         product.quantity = 1;
-        product.size = 50
+        // product.size = 50
         dispatch(addToCart(product))
         setShowAlert(true);
         setTimeout(() => {

@@ -3,8 +3,8 @@ import { Container, Row, Col, Button, Image, Badge, Form, InputGroup } from 'rea
 import Alert from 'react-bootstrap/Alert';
 // import '../css/product.css'; // Import the custom CSS
 import { useLocation,useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addToCartShow } from '../redux/cart';
+import { useDispatch,useSelector } from 'react-redux';
+import { addToCartShow, addToWishlist} from '../redux/cart';
 const Productshow = () => {
   const dispatech = useDispatch();
   
@@ -16,6 +16,8 @@ const Productshow = () => {
   const [productquentity,setProductQuentity] = useState(1);
   const [showMessage, setMessage] = useState('')
   const [productSize,setProductSize] = useState(50);
+  const cartStore = useSelector(state => state.cartItemAll.cartItem)
+
   const quentity = (e) => {
     const productQuentity = e.target.value
     setProductQuentity(productQuentity);
@@ -35,6 +37,7 @@ const Productshow = () => {
         setShowAlert(false)
     }, 3000);
   }
+  
   const setProductSizeAll = (size) => {
     let addtoCart = JSON.parse(localStorage.getItem('cartItem')) || []
     let quantity = 1
@@ -47,6 +50,18 @@ const Productshow = () => {
       })
     }
     setProductQuentity(quantity)
+  }
+  const heandlewishlist = (array) => {
+    let wishlistItem = {...array}
+    wishlistItem.quantity = productquentity
+    wishlistItem.size = productSize
+    console.log("wishlistItem",wishlistItem)
+    dispatech(addToWishlist(wishlistItem));
+    setMessage('Item Add to Wishlist Successfully')
+    setShowAlert(true)
+    setTimeout(() => {
+        setShowAlert(false)
+    }, 3000);
   }
   useEffect(() => {
     console.log("myArray",myArray)
@@ -125,17 +140,17 @@ const Productshow = () => {
               <Form.Control type="number" value={productquentity} min="1" onChange={(e)=>quentity(e)} />
             </InputGroup>
             <Button variant="success" className="add-to-cart" onClick={()=>heandleAddToCart(myArray)}>Add to Cart</Button>
-            <Button variant="outline-secondary" className="wishlist-button">
+            <Button variant="outline-secondary" className="wishlist-button" onClick={()=>heandlewishlist(myArray)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                   <path fill="currentColor" d="m12 20.703l.343.667a.75.75 0 0 1-.686 0l-.003-.002l-.007-.003l-.025-.013a31 31 0 0 1-5.233-3.576C3.8 15.573 1 12.332 1 8.514v-.001C1 5.053 3.829 2.5 6.736 2.5C9.03 2.5 10.881 3.726 12 5.605C13.12 3.726 14.97 2.5 17.264 2.5C20.17 2.5 23 5.052 23 8.514c0 3.818-2.801 7.06-5.389 9.262a31 31 0 0 1-5.233 3.576l-.025.013l-.007.003l-.002.001ZM6.736 4C4.657 4 2.5 5.88 2.5 8.514c0 3.107 2.324 5.96 4.861 8.12a29.7 29.7 0 0 0 4.566 3.175l.073.041l.073-.04c.271-.153.661-.38 1.13-.674c.94-.588 2.19-1.441 3.436-2.502c2.537-2.16 4.861-5.013 4.861-8.12C21.5 5.88 19.343 4 17.264 4c-2.106 0-3.801 1.389-4.553 3.643a.751.751 0 0 1-1.422 0C10.537 5.389 8.841 4 6.736 4"/>
                 </svg>
             </Button>
-            <Button variant="outline-secondary" className="compare-button">
+            {/* <Button variant="outline-secondary" className="compare-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
                   <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
                 </svg>
-            </Button>
+            </Button> */}
           </div>
 
           {/* Product Info */}

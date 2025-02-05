@@ -66,10 +66,11 @@ export const cart = createSlice({
     },
     reducers : {
         addToCart: (state,action) =>{
-            const existingItem = state.cartItem.find((item) => item.name === action.payload.name);
+            const existingItem = state.cartItem.find((item) => item.name === action.payload.name && item.size === action.payload.size);
 
             if (existingItem) {
                 existingItem.quantity += 1;
+                existingItem.size = action.payload.size
             } else {
                 state.cartItem.push({ ...action.payload, quantity: 1 });
             }
@@ -116,10 +117,10 @@ export const cart = createSlice({
             localStorage.setItem('cartItem', JSON.stringify(state.cartItem)); // Persist to local storage
         },
         addToWishlist: (state,action) =>{
-          const existingItem = state.wishlist.find((item) => item.name === action.payload.name);
-
+          const existingItem = state.wishlist.find((item) => item.name === action.payload.name && item.size === action.payload.size);
           if (existingItem) {
               existingItem.quantity += 1;
+              existingItem.size = action.payload.size
           } else {
               state.wishlist.push({ ...action.payload, quantity: 1 });
           }
