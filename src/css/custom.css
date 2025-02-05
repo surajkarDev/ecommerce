@@ -83,6 +83,8 @@ span.errorRequired {
   text-decoration: underline;
   text-underline-offset: 8px;
   text-decoration-thickness: 1.5px;
+  position: relative;
+  z-index: 1111;
 }
 .userprofile {
   background: #fff;

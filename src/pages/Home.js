@@ -53,11 +53,11 @@ const Home = () => {
             <Carousel.Item key={index} className='bg-black text-center  text-white' style={{ backgroundImage: `url(${x.images})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
               <div className={'sliderData row align-items-center '+ x.className}>
                 <div className='col-lg-6 d-flex justify-content-center'>
-                    <div className='mx-auto text-start bannerDataHeading'>
+                    <div className='mx-auto text-start bannerDataHeading '>
                       <h1 className='text-black fw-bold text-capitalize'>{x.heading}</h1>
                       <h1 className='text-black mb-3 fw-bold text-capitalize'>{x.heading1}</h1>
                      { x.perra ? <p className='text-black mb-3 text-capitalize'>{x.perra}</p> : ""}
-                      <a href='/allproduct' className='text-black-50 text-capitalize'>{x.btnName}</a>
+                     <Link as={Link} to="/allproduct" className='text-black-50 text-capitalize'>{x.btnName}</Link>
                       
                     </div>
                     {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
