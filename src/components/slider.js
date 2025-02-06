@@ -50,7 +50,7 @@ const SliderComponent = () => {
     initialSlide: 1,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 991,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
@@ -59,7 +59,7 @@ const SliderComponent = () => {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 767,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -67,10 +67,10 @@ const SliderComponent = () => {
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 575,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
+          slidesToShow: 1,
+          slidesToScroll: 1
         }
       }
     ]
@@ -139,7 +139,7 @@ const SliderComponent = () => {
                           ): '' }
                     <div className="d-flex justify-content-between align-items-center">
                       <p className="mb-0">${slide.newPrice}</p>
-                      <span className="d-flex gap-2">
+                      <span className="d-flex gap-2 cartBtnAll">
                       <button className="btn bg-success text-white d-flex align-items-center wishlistAllProducrt" onClick={()=>heandlewishlist(index)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>

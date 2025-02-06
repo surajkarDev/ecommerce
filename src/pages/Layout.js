@@ -79,13 +79,13 @@ const Layout = () => {
   }
   return (
     <>
-      <Navbar expand="lg" className="py-4 navbarMain">
+      <Navbar expand="lg" className="py-lg-4 py-2 navbarMain">
         <Container className='py-2'>
           <Navbar.Brand as={Link} to="/" className='text-capitalize'>
           <img src={logo} alt="BuyFresh" width={150} />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className='order-1 order-lg-0'/>
+          <Navbar.Collapse id="basic-navbar-nav" className='order-2 order-lg-0'>
             <Nav className="m-auto">
               {/* <Nav.Link as={Link} to="/" className="fw-medium px-3">Login</Nav.Link> */}
               <Nav.Link as={Link} to="/home" className="fw-medium px-3">Home</Nav.Link>

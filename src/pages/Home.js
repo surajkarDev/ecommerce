@@ -52,7 +52,7 @@ const Home = () => {
             banner.map((x,index) =>(
             <Carousel.Item key={index} className='bg-black text-center  text-white' style={{ backgroundImage: `url(${x.images})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
               <div className={'sliderData row align-items-center '+ x.className}>
-                <div className='col-lg-6 d-flex justify-content-center'>
+                <div className='col-xl-6 col-lg-8 col-12 d-flex justify-content-center'>
                     <div className='mx-auto text-start bannerDataHeading '>
                       <h1 className='text-black fw-bold text-capitalize'>{x.heading}</h1>
                       <h1 className='text-black mb-3 fw-bold text-capitalize'>{x.heading1}</h1>
@@ -62,7 +62,7 @@ const Home = () => {
                     </div>
                     {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
                 </div>
-                <div className='col-lg-6'>
+                <div className='col-xl-6 col-lg-4 col-0'>
                   {/* <img src={x.images1} alt={x.heading1} /> */}
                 </div>
               </div>
