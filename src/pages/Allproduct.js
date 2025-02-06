@@ -70,7 +70,7 @@ const AllProduct = () => {
         <div className="container">
             <div className="row">
             {slides.map((slide, index) => (
-                <div className="col-lg-3 mb-4">
+                <div className="col-lg-3 col-md-4 col-sm-6 mb-4">
                         <div key={index} className={slide.stock === 'Out of Stock' ? 'px-2 productSlider border position-relative productSliderDisabled' : 'px-2 productSlider border position-relative'} aria-disabled={slide.stock === 'Out of Stock'?true:false} disabled={slide.stock === 'Out of Stock'?true:false}>
                         <div className="productImg">
                             <img src={slide.img} alt={`slide${index}`} className="img-fluid" />
