@@ -67,7 +67,7 @@ const SliderComponent = () => {
         }
       },
       {
-        breakpoint: 575,
+        breakpoint: 399,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1
