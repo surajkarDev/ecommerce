@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const PageHeader = ({ heading, link, linkName }) => {
     return (
@@ -9,8 +10,12 @@ const PageHeader = ({ heading, link, linkName }) => {
                     <div className="pageheadermain p-5 rounded-4 my-4">
                         <h1>{heading}</h1>
                         <Breadcrumb className="mt-3">
-                            <Breadcrumb.Item href="/home">Home</Breadcrumb.Item>
-                            <Breadcrumb.Item href={link}>{linkName}</Breadcrumb.Item>
+                            <li className="breadcrumb-item">
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li className="breadcrumb-item">
+                                <Link to={link}>{linkName}</Link>
+                            </li>
                         </Breadcrumb>
                     </div>
                 </Col>

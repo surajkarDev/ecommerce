@@ -4,6 +4,7 @@ import Blog from '../components/Blog'
 import axios from "axios";
 import { counterContext } from "../context/context";
 import Blogie from "../components/Blogie";
+import PageHeader from "../components/pageHeader";
 
 const Blogs = () => {
   const navigate = useNavigate();
@@ -146,14 +147,25 @@ const Blogs = () => {
   },[]);
     return <>
     {/* Magical number is {magical?.index} */}
-    <counterContext.Provider value={count}>
-      <h1>Blog Articles</h1>
-      <Blog></Blog>
-      <Blogie countContent={countContent} blogUseCallback={blogUseCallback}></Blogie>
-      {count}
-      <button onClick={()=>setCount(count+1)}>Counter ++</button>
-      <button onClick={()=>blogUseCallback()}>Click Me</button>
-      </counterContext.Provider>
+    <section className="shoopingCartSectionHeader">
+        <PageHeader heading="Blogs" linkName="Blogs" link="/blogs" />
+    </section>
+    <section>
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <counterContext.Provider value={count}>
+              <h1>Blog Articles</h1>
+              <Blog></Blog>
+              <Blogie countContent={countContent} blogUseCallback={blogUseCallback}></Blogie>
+              {count}
+              <button onClick={()=>setCount(count+1)}>Counter ++</button>
+              <button onClick={()=>blogUseCallback()}>Click Me</button>
+              </counterContext.Provider>
+            </div>
+          </div>
+        </div>
+    </section>
     </>;
   };
   
