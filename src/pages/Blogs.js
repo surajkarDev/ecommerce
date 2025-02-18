@@ -1,15 +1,19 @@
-import React,{ useEffect, useState,useCallback,useMemo,memo } from "react";
+import React,{ useEffect, useState,useCallback,useMemo,memo,createContext,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Blog from '../components/Blog'
 import axios from "axios";
-import { counterContext } from "../context/context";
+// import { counterContext } from "../context/context";
 import Blogie from "../components/Blogie";
 import PageHeader from "../components/pageHeader";
-
+import useCustomHook from "../components/useCustomHook";
+export const counterContext = createContext(0);
 const Blogs = () => {
   const navigate = useNavigate();
   const [count,setCount] = useState(0)
   const [countContent,setCountContent] = useState('Initial Data')
+  const ref = useRef();
+  const [name ,setValue] = useCustomHook("username","")
+  const [password ,setPassword] = useCustomHook("password","")
   // const newArray = new Array(30000000).fill(0).map((_,i) => {
   //   return {
   //     index:i,
@@ -136,7 +140,15 @@ const Blogs = () => {
 
 
   // update a specific value in database using PATCH end
-
+  const handelChange = (e) => {
+    let value = e.target.value
+    if(e.target.name === 'name'){
+      setValue(value)
+    }
+    if(e.target.name === 'password'){
+      setPassword(value)
+    }
+  }
   useEffect(() => {
     let login = JSON.parse(localStorage.getItem('login')) || false
     if(!login){
@@ -157,11 +169,17 @@ const Blogs = () => {
             <counterContext.Provider value={count}>
               <h1>Blog Articles</h1>
               <Blog></Blog>
-              <Blogie countContent={countContent} blogUseCallback={blogUseCallback}></Blogie>
+              <Blogie countContent={countContent} blogUseCallback={blogUseCallback} ref={ref}></Blogie>
               {count}
               <button onClick={()=>setCount(count+1)}>Counter ++</button>
               <button onClick={()=>blogUseCallback()}>Click Me</button>
+
+              <button onClick={()=>ref.current.sayHi()}>parent to child</button>
               </counterContext.Provider>
+              <br/> <br/>
+              <label>Custom Hook</label><br/>
+              <input type="text" name="name" value={name} onChange={handelChange}/>
+              <input type="password" name="password" value={password} onChange={handelChange}/>
             </div>
           </div>
         </div>
