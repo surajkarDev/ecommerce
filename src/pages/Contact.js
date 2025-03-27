@@ -1,23 +1,28 @@
-import React, { useState,useEffect } from 'react';
-import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const navigate = useNavigate();
-  useEffect(()=>{
-  let login = JSON.parse(localStorage.getItem('login')) || false;
-  if(!login){
-    navigate('/');
-  }
-  },[])
+  const formRef = useRef();
+  
+  useEffect(() => {
+    let login = JSON.parse(localStorage.getItem("login")) || false;
+    if (!login) {
+      navigate("/");
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,35 +30,33 @@ const Contact = () => {
       ...formData,
       [name]: value,
     });
+
     // Clear specific error when the user starts typing
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: '',
+      [name]: "",
     }));
   };
 
   const validate = () => {
     const newErrors = {};
-    // Name validation
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required.';
+      newErrors.name = "Name is required.";
     } else if (formData.name.length < 3) {
-      newErrors.name = 'Name must be at least 3 characters long.';
+      newErrors.name = "Name must be at least 3 characters long.";
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required.';
+      newErrors.email = "Email is required.";
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.';
+      newErrors.email = "Please enter a valid email address.";
     }
 
-    // Message validation
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required.';
+      newErrors.message = "Message is required.";
     } else if (formData.message.length < 10) {
-      newErrors.message = 'Message must be at least 10 characters long.';
+      newErrors.message = "Message must be at least 10 characters long.";
     }
 
     return newErrors;
@@ -61,25 +64,33 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    // Reset error messages and display a success message
-    setErrors({});
-    setIsSubmitted(true);
+    setIsLoading(true);
 
-    console.log('Form submitted:', formData);
-
-    // Reset form fields
-    setFormData({
-      name: '',
-      email: '',
-      message: '',
-    });
+    emailjs
+      .sendForm(
+        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
+        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
+        formRef.current,
+        "YOUR_PUBLIC_KEY" // Replace with your EmailJS public key
+      )
+      .then(
+        (result) => {
+          console.log("Email successfully sent!", result.text);
+          setIsSubmitted(true);
+          setFormData({ name: "", email: "", message: "" });
+        },
+        (error) => {
+          console.log("Failed to send email.", error.text);
+        }
+      )
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -93,8 +104,7 @@ const Contact = () => {
                 Your message has been sent successfully!
               </Alert>
             )}
-            <Form onSubmit={handleSubmit}>
-              {/* Name Field */}
+            <Form ref={formRef} onSubmit={handleSubmit}>
               <Form.Group controlId="formName" className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
@@ -104,12 +114,10 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   isInvalid={!!errors.name}
-                  
                 />
                 <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
               </Form.Group>
 
-              {/* Email Field */}
               <Form.Group controlId="formEmail" className="mb-3">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
@@ -119,12 +127,10 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   isInvalid={!!errors.email}
-                  
                 />
                 <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
               </Form.Group>
 
-              {/* Message Field */}
               <Form.Group controlId="formMessage" className="mb-3">
                 <Form.Label>Message</Form.Label>
                 <Form.Control
@@ -135,15 +141,13 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   isInvalid={!!errors.message}
-                  
                 />
                 <Form.Control.Feedback type="invalid">{errors.message}</Form.Control.Feedback>
               </Form.Group>
 
-              {/* Submit Button */}
               <div className="text-center">
-                <Button variant="primary" type="submit">
-                  Submit
+                <Button variant="primary" type="submit" disabled={isLoading}>
+                  {isLoading ? "Sending..." : "Submit"}
                 </Button>
               </div>
             </Form>
