@@ -88,7 +88,8 @@ const SliderComponent = () => {
     sliderdata.sizedefault = 50
     const myArray = sliderdata
     console.log("myArray",myArray)
-    navigate('/productshow',{ state: { data: myArray } });
+    // navigate('/productshow',{ state: { data: myArray } });
+    navigate(`/productshow?id=${index}`);
   } 
   return (
     <>

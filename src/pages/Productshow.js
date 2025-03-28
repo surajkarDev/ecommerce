@@ -12,11 +12,13 @@ const Productshow = () => {
   const navigate = useNavigate()
   const location = useLocation();
   const { data: myArray } = location.state || {}; // Get the array from state
-  const [showAlert, setShowAlert] = useState(false);
+  const query  = new URLSearchParams(useLocation().search);
+  const productId = query.get('id') || ""; // Get ID from query params
   const [productquentity,setProductQuentity] = useState(1);
   const [showMessage, setMessage] = useState('')
   const [productSize,setProductSize] = useState(50);
-  const cartStore = useSelector(state => state.cartItemAll.cartItem)
+  const cartStore = useSelector(state => state.cartItemAll.sliderAllItem)
+  const [showAlert, setShowAlert] = useState(false);
 
   const quentity = (e) => {
     const productQuentity = e.target.value
@@ -76,6 +78,13 @@ const Productshow = () => {
       setProductQuentity(existingProduct.quantity);
     }
   },[navigate, myArray]);
+  useEffect(()=>{
+    if (!productId) {
+      navigate('/');
+    } else {
+      console.log("productId", cartStore?.[productId]); 
+    }
+  },[])
   return (
     <Container className="product-page">
       <Row>
@@ -90,10 +99,10 @@ const Productshow = () => {
     }
         {/* Product Image Section */}
         {
-          myArray ? (
+          cartStore[productId] ? (
             <Col md={5} className="product-image">
               <Image 
-                src={myArray.img} // Replace with your product image
+                src={cartStore[productId].img} // Replace with your product image
                 alt="Product Image"
                 fluid
               />
@@ -103,16 +112,16 @@ const Productshow = () => {
         
 
         {/* Product Details Section */}
-        {myArray ? (
+        {cartStore[productId] ? (
         <Col md={7} className="product-details">
           {/* Sale Badge */}
           <Badge className="sale-badge">Sale Off</Badge>
-          <h2 className="product-title">{myArray.name}</h2>
+          <h2 className="product-title">{cartStore[productId].name}</h2>
           <p className="product-rating">⭐⭐⭐⭐⭐ (32 reviews)</p>
           
           {/* Price */}
           <h3 className="product-price">
-            {myArray.newPrice} <span className="discount-price"><del>{(myArray.newPrice*1.5).toFixed(2)}</del></span>
+            {cartStore[productId].newPrice} <span className="discount-price"><del>{(cartStore[productId].newPrice*1.5).toFixed(2)}</del></span>
           </h3>
           <p className="discount-info">26% Off</p>
 
@@ -123,7 +132,7 @@ const Productshow = () => {
           <div className="size-selector mb-3">
             <span>Size / Weight: </span>
             {
-              myArray?.size?.map((x, index) => (
+              cartStore[productId]?.size?.map((x, index) => (
                 <Button variant="outline-secondary" className={productSize === x ? 'size-button selected' : 'size-button'} key={index} onClick={() => setProductSizeAll(x)}>{x}g</Button>
               ))
             }
@@ -139,8 +148,8 @@ const Productshow = () => {
             <InputGroup className="quantity-input w-25">
               <Form.Control type="number" value={productquentity} min="1" onChange={(e)=>quentity(e)} />
             </InputGroup>
-            <Button variant="success" className="add-to-cart" onClick={()=>heandleAddToCart(myArray)}>Add to Cart</Button>
-            <Button variant="outline-secondary" className="wishlist-button" onClick={()=>heandlewishlist(myArray)}>
+            <Button variant="success" className="add-to-cart" onClick={()=>heandleAddToCart(cartStore[productId])}>Add to Cart</Button>
+            <Button variant="outline-secondary" className="wishlist-button" onClick={()=>heandlewishlist(cartStore[productId])}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                   <path fill="currentColor" d="m12 20.703l.343.667a.75.75 0 0 1-.686 0l-.003-.002l-.007-.003l-.025-.013a31 31 0 0 1-5.233-3.576C3.8 15.573 1 12.332 1 8.514v-.001C1 5.053 3.829 2.5 6.736 2.5C9.03 2.5 10.881 3.726 12 5.605C13.12 3.726 14.97 2.5 17.264 2.5C20.17 2.5 23 5.052 23 8.514c0 3.818-2.801 7.06-5.389 9.262a31 31 0 0 1-5.233 3.576l-.025.013l-.007.003l-.002.001ZM6.736 4C4.657 4 2.5 5.88 2.5 8.514c0 3.107 2.324 5.96 4.861 8.12a29.7 29.7 0 0 0 4.566 3.175l.073.041l.073-.04c.271-.153.661-.38 1.13-.674c.94-.588 2.19-1.441 3.436-2.502c2.537-2.16 4.861-5.013 4.861-8.12C21.5 5.88 19.343 4 17.264 4c-2.106 0-3.801 1.389-4.553 3.643a.751.751 0 0 1-1.422 0C10.537 5.389 8.841 4 6.736 4"/>
                 </svg>
@@ -171,7 +180,8 @@ const Productshow = () => {
       </Row>
 
       {/* Related Products Section */}
-      <Row className="related-products">
+      {cartStore[productId] ? (
+        <Row className="related-products">
         <Col>
           <h4>Related Products</h4>
           <div className="related-products-carousel">
@@ -198,6 +208,14 @@ const Productshow = () => {
           </div>
         </Col>
       </Row>
+      ):(
+        <Row className="related-products">
+        <Col> 
+          <h2 className='text-center border p-5 rounded-3'>Product Not Found</h2>
+        </Col>
+        </Row>
+      )}
+      
     </Container>
   );
 };
