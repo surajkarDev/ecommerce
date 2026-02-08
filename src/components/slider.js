@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,memo } from "react";
 import { Badge} from 'react-bootstrap';
 import Slider from "react-slick";
 import Alert from 'react-bootstrap/Alert';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from "react-redux";
 import { addToCart,addToWishlist } from "../redux/cart";
 
-const SliderComponent = () => {
+const SliderComponent = memo(() => {
   
   // redux start
   const sliderItems = useSelector(state => state.cartItemAll.sliderAllItem) || []
@@ -91,6 +91,7 @@ const SliderComponent = () => {
     // navigate('/productshow',{ state: { data: myArray } });
     navigate(`/productshow?id=${index}`);
   } 
+  console.log("Slider render");
   return (
     <>
     <section className="my-5">
@@ -170,6 +171,6 @@ const SliderComponent = () => {
     
     </>
   );
-};
+});
 
 export default SliderComponent;

@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useMemo } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
 import Compslider from '../components/slider'
@@ -6,6 +6,7 @@ import { useNavigate,Link } from 'react-router-dom';
 const Home = () => {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
+  const [counter,setCounter] = useState(0);
   const banner = [
    {
     images: require('../images/new/slider/slider-2.png'),
@@ -44,6 +45,12 @@ const Home = () => {
       navigate('/');
     }
   },[]);
+  const counterRun = () =>{
+    setCounter(counter+1)
+  }
+  const sliderComp = useMemo(() => (
+    <Compslider />
+  ), []);
     return (
       <div>
       <Container className='mt-4'>
@@ -71,7 +78,11 @@ const Home = () => {
           }
         </Carousel>
       </Container>
-     <Compslider></Compslider>
+      {/* slider component with useMemo start */}
+      {sliderComp}
+      {/* slider component with useMemo end */}
+     {counter}
+     <button onClick={()=>counterRun()}>Click Me</button>
       </div>
       
     );

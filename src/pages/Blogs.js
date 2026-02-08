@@ -1,4 +1,5 @@
 import React,{ useEffect, useState,useCallback,useMemo,memo,createContext,useRef } from "react";
+import useCustomHook2 from "../components/useCustomComp";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import Blog from '../components/Blog'
@@ -7,14 +8,23 @@ import axios from "axios";
 import Blogie from "../components/Blogie";
 import PageHeader from "../components/pageHeader";
 import useCustomHook from "../components/useCustomHook";
+import Callback from "../components/Callback";
 export const counterContext = createContext(0);
+
 const Blogs = () => {
   const navigate = useNavigate();
   const [count,setCount] = useState(0)
   const [countContent,setCountContent] = useState('Initial Data')
   const ref = useRef();
   const [name ,setValue] = useCustomHook("username","")
-  const [password ,setPassword] = useCustomHook("password","")
+  const [password ,setPassword] = useCustomHook("password","");
+  const [activity,setActivity] = useState(false);
+  const [list,setlist] = useState(["React","Angular","Vue"]);
+  // Sample blog posts data
+  const {data:user,loading:loadingUser,error:errorUser} = useCustomHook2("http://localhost:3001/users");
+  const {data:chats,loading:loadingChats,error:errorChats} = useCustomHook2("http://localhost:3001/chats");
+  console.log("Custom Hook userdata",user,loadingUser,errorUser);
+  console.log("Custom Hook Chat",chats,loadingChats,errorChats);
   const blogPosts = [
     {
         id: 1,
@@ -178,11 +188,25 @@ const Blogs = () => {
     blogApi();
     fetchData();
   },[]);
+  const handleCallbackClick = useCallback(() => {
+    console.log("Callback button clicked");
+    setCount(count + 1);
+  }, []);
+  const handleCallbackClick2 = () => {
+    console.log("Callback button clicked");
+    setCount(count + 1);
+  }
+  // const blogComponent = useMemo(() => {
+  //   return <Callback onClick={handleCallbackClick} label="Click Me" />
+  // },[])
     return <>
     {/* Magical number is {magical?.index} */}
     <section className="shoopingCartSectionHeader">
         <PageHeader heading="Blogs" linkName="Blogs" link="/blogs" />
     </section>
+    {/* {blogComponent} */}
+    <Callback onClick={handleCallbackClick} label="Click Me" />
+     <Blogie countContent={countContent} blogUseCallback={blogUseCallback} ref={ref} text="Hello World" number={26} isActive={activity} list={list} obj={{ Name: "Suraj" }} onClick={handleCallbackClick2} content={<span>This is a parent node</span>} element={<strong>I am a React element from parent</strong>} size="large" stringArray={["One", "Two", "Three"]}></Blogie>
     <section>
       <div className="container d-none">
         <div className="row">
@@ -214,7 +238,7 @@ const Blogs = () => {
                             <Card.Body>
                                 <Card.Title>{post.title}</Card.Title>
                                 <Card.Text>{post.description}</Card.Text>
-                                <Button variant="primary">Read More</Button>
+                                <Button variant="primary" onClick={()=>handleCallbackClick2()}>Read More</Button>
                             </Card.Body>
                         </Card>
                     </Col>
